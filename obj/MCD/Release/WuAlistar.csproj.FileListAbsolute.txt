@@ -1,0 +1,8 @@
+C:\Users\Mertss\AppData\Roaming\EloBuddy\Repositories\C9CD7380\WuAlistar\bin\Release\WuAlistar.exe.config
+C:\Users\Mertss\AppData\Roaming\EloBuddy\Repositories\C9CD7380\WuAlistar\bin\Release\WuAlistar.exe
+C:\Users\Mertss\AppData\Roaming\EloBuddy\Repositories\C9CD7380\WuAlistar\bin\Release\EloBuddy.dll
+C:\Users\Mertss\AppData\Roaming\EloBuddy\Repositories\C9CD7380\WuAlistar\bin\Release\EloBuddy.SDK.dll
+C:\Users\Mertss\AppData\Roaming\EloBuddy\Repositories\C9CD7380\WuAlistar\bin\Release\SharpDX.dll
+C:\Users\Mertss\AppData\Roaming\EloBuddy\Repositories\C9CD7380\WuAlistar\bin\Release\SharpDX.Direct3D9.dll
+C:\Users\Mertss\AppData\Roaming\EloBuddy\Repositories\C9CD7380\WuAlistar\bin\Release\Newtonsoft.Json.dll
+C:\Users\Mertss\AppData\Roaming\EloBuddy\Repositories\C9CD7380\WuAlistar\obj\MCD\Release\WuAlistar.exe
