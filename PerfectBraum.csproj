@@ -7,8 +7,8 @@
     <ProjectGuid>{7ACA0442-DA0F-441B-805B-7A6E87DCEF8C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WuAlistar</RootNamespace>
-    <AssemblyName>WuAlistar</AssemblyName>
+    <RootNamespace>PerfectBraum</RootNamespace>
+    <AssemblyName>PerfectBraum</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
