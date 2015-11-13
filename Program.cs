@@ -21,14 +21,14 @@ namespace PerfectBraum
         public static AIHeroClient Player { get { return ObjectManager.Player; } }
 
         public static Item Bilgewater, Randuin, QSS, Glory, FOTMountain, Mikael, Solari;
-        public static Menu Menu,Combo,Auto,Draw,Update;
+        public static Menu Menu,Combo,Auto,Draw,Update,_skinMenu;
         public static AIHeroClient Target = null;
         public static List<string> DodgeSpells = new List<string>() { "LuxMaliceCannon", "LuxMaliceCannonMis", "EzrealtrueShotBarrage", "KatarinaR", "YasuoDashWrapper", "ViR", "NamiR", "ThreshQ", "xerathrmissilewrapper", "yasuoq3w", "UFSlash" };
         public static List<string> DangerousDodgeSpells = new List<string>() { "KatarinaR" };
-        public static readonly Spell.Skillshot Q = new Spell.Skillshot(SpellSlot.Q, 1000, EloBuddy.SDK.Enumerations.SkillShotType.Linear, 250, 1500, 100);
+        public static readonly Spell.Skillshot Q = new Spell.Skillshot(SpellSlot.Q, 1000, EloBuddy.SDK.Enumerations.SkillShotType.Linear, 250, 1500, 80);
         public static readonly Spell.Targeted W = new Spell.Targeted(SpellSlot.W, 650);
-        public static readonly Spell.Skillshot E = new Spell.Skillshot(SpellSlot.E, 500, EloBuddy.SDK.Enumerations.SkillShotType.Cone, 250, 2000, 500);
-        public static readonly Spell.Skillshot R = new Spell.Skillshot(SpellSlot.R, 1300, EloBuddy.SDK.Enumerations.SkillShotType.Linear, 250, 1300, 140);
+        public static readonly Spell.Skillshot E = new Spell.Skillshot(SpellSlot.E, 500, EloBuddy.SDK.Enumerations.SkillShotType.Cone, 250, 2000, 250);
+        public static readonly Spell.Skillshot R = new Spell.Skillshot(SpellSlot.R, 1300, EloBuddy.SDK.Enumerations.SkillShotType.Linear, 250, 1300, 120);
 
         static void Main(string[] args) { Loading.OnLoadingComplete += OnLoadingComplete; }
 
@@ -83,14 +83,16 @@ namespace PerfectBraum
             Draw.Add("DrawR", new CheckBox("Draw R Range"));
 
             Update = Menu.AddSubMenu("Update Logs", "UpdateLogs");
-            Update.AddLabel("V0.1 Shared");
-            Update.AddLabel("- Using Items");
+            Update.AddLabel("V0.2 Updated");
+            Update.AddLabel("- Cast W Fixed");
+            Update.AddLabel("- Cast E Partially Fixed(I'm still working on it)");
 
             Game.OnTick += Game_OnTick;
             Drawing.OnDraw += Drawing_OnDraw;
             AIHeroClient.OnProcessSpellCast += AIHeroClient_OnProcessSpellCast;
 
             Chat.Print("Perfect " + CN + " Loaded");
+
         }
 
         
@@ -112,8 +114,8 @@ namespace PerfectBraum
                 }
             }
         }
-        
-        
+
+
         static void Drawing_OnDraw(EventArgs args)
         {
             if (!Player.IsDead)
@@ -204,12 +206,12 @@ namespace PerfectBraum
                         {
                             foreach (AIHeroClient ally in EntityManager.Heroes.Allies)
                             {
-                                if (W.IsReady() && ally.HealthPercent <= 30 && Target.CanCast)
+                                if (W.IsReady() && Target.CanCast)
                                 {
                                     W.Cast(ally);
                                     if (E.IsReady())
                                     {
-                                        E.Cast();
+                                        E.Cast(Target);
                                     }
                                     
                                 }
@@ -226,7 +228,7 @@ namespace PerfectBraum
 
                         }
 
-                        if (EntityManager.Heroes.Enemies.Where(enemy => enemy != Player && enemy.Distance(Player) <= 1100).Count() > 2 && R.IsReady())
+                        if (EntityManager.Heroes.Enemies.Where(enemy => enemy != Player && enemy.Distance(Player) <= 1100).Count() >= 2 && R.IsReady())
                         {
                             R.Cast(Target);
                         }
@@ -244,7 +246,7 @@ namespace PerfectBraum
                     }
                     if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
                     {
-                        if (Q.IsReady() && Target.IsValidTarget(Q.Range) && !Player.IsDashing())
+                        if (Q.IsReady() && Target.IsValidTarget(Q.Range))
                         {
                             Q.Cast(Target);
                         }

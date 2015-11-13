@@ -8,3 +8,4 @@ C:\Users\Mertss\Desktop\Perfect Braum\bin\Debug\WuAlistar.exe.config
 C:\Users\Mertss\Desktop\Perfect Braum\obj\Debug\WuAlistar.exe
 C:\Users\Mertss\Desktop\Perfect Braum\obj\Debug\WuAlistar.pdb
 C:\Users\Mertss\Desktop\Perfect Braum\bin\Debug\PerfectBraum.exe.config
+C:\Users\Mertss\Desktop\My Addons\Perfect Braum\bin\Debug\PerfectBraum.exe.config
