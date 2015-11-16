@@ -25,10 +25,10 @@ namespace PerfectBraum
         public static AIHeroClient Target = null;
         public static List<string> DodgeSpells = new List<string>() { "LuxMaliceCannon", "LuxMaliceCannonMis", "EzrealtrueShotBarrage", "KatarinaR", "YasuoDashWrapper", "ViR", "NamiR", "ThreshQ", "xerathrmissilewrapper", "yasuoq3w", "UFSlash" };
         public static List<string> DangerousDodgeSpells = new List<string>() { "KatarinaR" };
-        public static readonly Spell.Skillshot Q = new Spell.Skillshot(SpellSlot.Q, 1000, EloBuddy.SDK.Enumerations.SkillShotType.Linear, 250, 1500, 80);
+        public static readonly Spell.Skillshot Q = new Spell.Skillshot(SpellSlot.Q, 1000, EloBuddy.SDK.Enumerations.SkillShotType.Linear, 250, 1700, 60);
         public static readonly Spell.Targeted W = new Spell.Targeted(SpellSlot.W, 650);
         public static readonly Spell.Skillshot E = new Spell.Skillshot(SpellSlot.E, 500, EloBuddy.SDK.Enumerations.SkillShotType.Cone, 250, 2000, 250);
-        public static readonly Spell.Skillshot R = new Spell.Skillshot(SpellSlot.R, 1300, EloBuddy.SDK.Enumerations.SkillShotType.Linear, 250, 1300, 120);
+        public static readonly Spell.Skillshot R = new Spell.Skillshot(SpellSlot.R, 1300, EloBuddy.SDK.Enumerations.SkillShotType.Linear, 250, 1300, 115);
 
         static void Main(string[] args) { Loading.OnLoadingComplete += OnLoadingComplete; }
 
