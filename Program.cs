@@ -21,7 +21,7 @@ namespace PerfectBraum
         public static AIHeroClient Player { get { return ObjectManager.Player; } }
 
         public static Item Bilgewater, Randuin, QSS, Glory, FOTMountain, Mikael, Solari;
-        public static Menu Menu,Combo,Auto,Draw,Update,_skinMenu;
+        public static Menu Menu,Combo,Auto,Draw,Update,Skin;
         public static AIHeroClient Target = null;
         public static List<string> DodgeSpells = new List<string>() { "LuxMaliceCannon", "LuxMaliceCannonMis", "EzrealtrueShotBarrage", "KatarinaR", "YasuoDashWrapper", "ViR", "NamiR", "ThreshQ", "xerathrmissilewrapper", "yasuoq3w", "UFSlash" };
         public static List<string> DangerousDodgeSpells = new List<string>() { "KatarinaR" };
@@ -48,6 +48,7 @@ namespace PerfectBraum
 
 
             Menu = MainMenu.AddMenu("Perfect Braum", "Perfect Braum");
+            Menu.Add("Support", new CheckBox("Support Mode", false));
             
             string slot = "";
             string champ = "";
@@ -82,12 +83,17 @@ namespace PerfectBraum
             Draw.Add("DrawW", new CheckBox("Draw W Range"));
             Draw.Add("DrawR", new CheckBox("Draw R Range"));
 
+            Skin = Menu.AddSubMenu("Skin Changer", "SkinChange");
+            Skin.Add("checkSkin", new CheckBox("Use Skin Changer"));
+            Skin.Add("skin.Id", new Slider("Skin", 3, 0, 3));
+
             Update = Menu.AddSubMenu("Update Logs", "UpdateLogs");
             Update.AddLabel("V0.2 Updated");
             Update.AddLabel("- Cast W Fixed");
             Update.AddLabel("- Cast E Partially Fixed(I'm still working on it)");
 
             Game.OnTick += Game_OnTick;
+            Game.OnUpdate += OnGameUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
             AIHeroClient.OnProcessSpellCast += AIHeroClient_OnProcessSpellCast;
 
@@ -111,8 +117,18 @@ namespace PerfectBraum
                 if (R.IsReady() && R.IsInRange(sender))
                 {
                     R.Cast(sender);
+                    
                 }
             }
+        }
+
+        private static void OnGameUpdate(EventArgs args)
+        {
+            if (checkSkin())
+            {
+                Player.SetSkinId(SkinId());
+            }
+            
         }
 
 
@@ -139,13 +155,26 @@ namespace PerfectBraum
             return;
         }
 
-        
+        public static int SkinId()
+        {
+            return Skin["skin.Id"].Cast<Slider>().CurrentValue;
+        }
+        public static bool checkSkin()
+        {
+            return Skin["checkSkin"].Cast<CheckBox>().CurrentValue;
+        }
+
         static void Game_OnTick(EventArgs args)
         {
             var UseFOT = (Auto["AutoFOT"].Cast<CheckBox>().CurrentValue);
             var UseMikael = (Auto["AutoMikael"].Cast<CheckBox>().CurrentValue);
             if (Player.IsDead)
             { return; }
+
+            if (Menu["Support"].Cast<CheckBox>().CurrentValue);
+            {
+                Orbwalker.DisableAttacking = true;
+            }
 
             if (Player.CountEnemiesInRange(1000) > 0)
             {
