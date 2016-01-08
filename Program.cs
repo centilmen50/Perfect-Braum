@@ -48,7 +48,6 @@ namespace PerfectBraum
 
 
             Menu = MainMenu.AddMenu("Perfect Braum", "Perfect Braum");
-            Menu.Add("Support", new CheckBox("Support Mode", false));
             
             string slot = "";
             string champ = "";
@@ -136,17 +135,17 @@ namespace PerfectBraum
         {
             if (!Player.IsDead)
             {
-                if (Menu["DrawQ"].Cast<CheckBox>().CurrentValue)
+                if (Draw["DrawQ"].Cast<CheckBox>().CurrentValue)
                 {
                     Drawing.DrawCircle(Player.Position, Q.Range, Q.IsReady() ? Color.Green : Color.Red);
                 }
 
-                if (Menu["DrawW"].Cast<CheckBox>().CurrentValue)
+                if (Draw["DrawW"].Cast<CheckBox>().CurrentValue)
                 {
                     Drawing.DrawCircle(Player.Position, W.Range, W.IsReady() ? Color.Green : Color.Red);
                 }
 
-                if (Menu["DrawR"].Cast<CheckBox>().CurrentValue)
+                if (Draw["DrawR"].Cast<CheckBox>().CurrentValue)
                 {
                     Drawing.DrawCircle(Player.Position, R.Range, R.IsReady() ? Color.Green : Color.Red);
                 }
@@ -170,11 +169,6 @@ namespace PerfectBraum
             var UseMikael = (Auto["AutoMikael"].Cast<CheckBox>().CurrentValue);
             if (Player.IsDead)
             { return; }
-
-            if (Menu["Support"].Cast<CheckBox>().CurrentValue);
-            {
-                Orbwalker.DisableAttacking = true;
-            }
 
             if (Player.CountEnemiesInRange(1000) > 0)
             {
