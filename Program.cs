@@ -56,7 +56,7 @@ namespace PerfectBraum
             Combo.Add("ComboUseW", new CheckBox("Use W"));
             Combo.Add("ComboUseE", new CheckBox("Use E"));
             Combo.Add("ComboUseR", new CheckBox("Use R"));
-
+            Combo.Add("rCount", new Slider("R Count >= ", 3, 1, 5));
 
             Auto = Menu.AddSubMenu("Auto Settings");
             Auto.Add("AutoE", new CheckBox("Auto E for Dodge Spell"));
@@ -196,6 +196,7 @@ namespace PerfectBraum
             Target = TargetSelector.GetTarget(700, DamageType.Magical);
             var useGlory = (Auto["AutoGlory"].Cast<CheckBox>().CurrentValue);
             var useRanduin = (Auto["AutoRanduin"].Cast<CheckBox>().CurrentValue);
+            var rCount = Combo["rCount"].Cast<Slider>().CurrentValue;
             if (Target != null)
             {
                 if (Target.IsValidTarget())
@@ -251,9 +252,13 @@ namespace PerfectBraum
 
                         }
 
-                        if (EntityManager.Heroes.Enemies.Where(enemy => enemy != Player && enemy.Distance(Player) <= 1100).Count() >= 2 && R.IsReady())
+                        foreach (AIHeroClient enemie in EntityManager.Heroes.Enemies)
                         {
-                            R.Cast(Target);
+                            if (Combo["rCount"].Cast<Slider>().CurrentValue > 0 && R.IsReady() && EntityManager.Heroes.Enemies.Where(enemy => enemy != Player && enemy.Distance(Player) <= 1200).Count() >= rCount && R.IsReady() && !enemie.IsDead && !enemie.IsZombie)
+                            {
+                                R.Cast(enemie);
+                            }
+
                         }
 
                         if (Target.IsValidTarget(Bilgewater.Range) && Bilgewater.IsReady())

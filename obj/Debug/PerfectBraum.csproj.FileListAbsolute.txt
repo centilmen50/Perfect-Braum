@@ -10,3 +10,4 @@ C:\Users\Mertss\Desktop\Perfect Braum\obj\Debug\WuAlistar.pdb
 C:\Users\Mertss\Desktop\Perfect Braum\bin\Debug\PerfectBraum.exe.config
 C:\Users\Mertss\Desktop\My Addons\Perfect Braum\bin\Debug\PerfectBraum.exe.config
 C:\Users\Mertss\Desktop\Üzerinde Çalıştığım Addonalr\My Addons\Perfect Braum\bin\Debug\PerfectBraum.exe.config
+C:\Users\Mertss\Desktop\buddy\My Addons\Perfect Braum\bin\Debug\PerfectBraum.exe.config
