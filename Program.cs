@@ -204,6 +204,10 @@ namespace PerfectBraum
                  
                     if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
                     {
+                        var useQ = Combo["ComboUseQ"].Cast<CheckBox>().CurrentValue;
+                        var useW = Combo["ComboUseW"].Cast<CheckBox>().CurrentValue;
+                        var useE = Combo["ComboUseE"].Cast<CheckBox>().CurrentValue;
+                        var useR = Combo["ComboUseR"].Cast<CheckBox>().CurrentValue;
                         var level = 15 * Player.Level;
                         if (QSS.IsReady() && (Player.HasBuffOfType(BuffType.Charm) || Player.HasBuffOfType(BuffType.Blind) || Player.HasBuffOfType(BuffType.Fear) || Player.HasBuffOfType(BuffType.Polymorph) || Player.HasBuffOfType(BuffType.Silence) || Player.HasBuffOfType(BuffType.Sleep) || Player.HasBuffOfType(BuffType.Snare) || Player.HasBuffOfType(BuffType.Stun) || Player.HasBuffOfType(BuffType.Suppression) || Player.HasBuffOfType(BuffType.Taunt)))
                         {
@@ -221,7 +225,7 @@ namespace PerfectBraum
                                     }
 
                                 }                                         
-                                        if (Q.IsReady() && Target.IsValidTarget(Q.Range) && !Player.IsDashing())
+                         if (Q.IsReady() && Target.IsValidTarget(Q.Range) && !Player.IsDashing() && useQ)
                         {
                             Q.Cast(Target);
                         }
@@ -230,10 +234,10 @@ namespace PerfectBraum
                         {
                             foreach (AIHeroClient ally in EntityManager.Heroes.Allies)
                             {
-                                if (W.IsReady() && Target.CanCast)
+                                if (W.IsReady() && Target.CanCast && useW)
                                 {
                                     W.Cast(ally);
-                                    if (E.IsReady())
+                                    if (E.IsReady() && useE)
                                     {
                                         E.Cast(Target);
                                     }
@@ -245,7 +249,7 @@ namespace PerfectBraum
                         if (EntityManager.Heroes.Allies.Where(ally => ally != Player && ally.Distance(Player) <= 700).Count() > 0 && Glory.IsReady() && useGlory)
                         {
                                 Glory.Cast();
-                                if (Q.IsReady())
+                                if (Q.IsReady() && useQ)
                                 {
                                     Q.Cast(Target);
                                 }
@@ -254,7 +258,7 @@ namespace PerfectBraum
 
                         foreach (AIHeroClient enemie in EntityManager.Heroes.Enemies)
                         {
-                            if (Combo["rCount"].Cast<Slider>().CurrentValue > 0 && R.IsReady() && EntityManager.Heroes.Enemies.Where(enemy => enemy != Player && enemy.Distance(Player) <= 1200).Count() >= rCount && R.IsReady() && !enemie.IsDead && !enemie.IsZombie)
+                            if (Combo["rCount"].Cast<Slider>().CurrentValue > 0 && R.IsReady() && EntityManager.Heroes.Enemies.Where(enemy => enemy != Player && enemy.Distance(Player) <= 1200).Count() >= rCount && R.IsReady() && !enemie.IsDead && !enemie.IsZombie && useR)
                             {
                                 R.Cast(enemie);
                             }
